@@ -7,6 +7,7 @@
 - [Racer](#racer)
 - [Emacs Config](#config)
 - [Example](#example)
+- [Issues](#issues)
 
 
 ## rust
@@ -35,8 +36,8 @@ install and config [emacs-racer](https://github.com/racer-rust/emacs-racer). it 
 ## Emacs Config
 
 ``` emacs-lisp
-(add-hook 'rust-mode-hook 'cargo-minor-mode)
-(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'rust-mode-hook  #'cargo-minor-mode)
+(add-hook 'rust-mode-hook  #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 (add-hook 'racer-mode-hook #'company-mode)
 
@@ -57,3 +58,17 @@ install and config [emacs-racer](https://github.com/racer-rust/emacs-racer). it 
 - build & run
 
 ![example](resources/rustfmt-and-completion.gif)
+
+
+## Issues
+
+- racer can't find the directory pointed to by the `RUST_SRC_PATH` variable:
+
+[racer-rust-issue-85](https://github.com/racer-rust/emacs-racer/issues/85)
+
+```
+(setq racer-rust-src-path
+      (concat (string-trim
+               (shell-command-to-string "rustc --print sysroot"))
+              "/lib/rustlib/src/rust/src"))
+```
